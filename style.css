@@ -77,6 +77,8 @@ h1 {
 }
 
 .again {
+  visibility: hidden;
+  /* display: none; */
   position: absolute;
   top: 2rem;
   left: 2rem;
