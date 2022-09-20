@@ -1,2 +1,0 @@
-Desativar o botão de check quando ganhar ou perder
-Diminuir repetições de codigo
