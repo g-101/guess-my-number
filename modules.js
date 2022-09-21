@@ -5,30 +5,21 @@ export function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export const displayMessage = message => {
+export const displayMessage = function (message) {
   document.querySelector('.message').innerHTML = message;
 };
 
-const changeStyle = (randomNumber, bgColor, message, callDisplayMessage = displayMessage) => {
-  document.querySelector('.number').innerHTML = randomNumber;
-  document.querySelector('body').style.backgroundColor = bgColor;
-  document.querySelector('.again').style.visibility = 'visible';
-  callDisplayMessage(message);
-};
-
-export function continueGame(score, guess, randomNumber, callChangeStyle = changeStyle) {
-  let out = false;
-
-  if (score <= 1) {
-    document.querySelector('.score').innerHTML = 0;
-    callChangeStyle(randomNumber, '#ff0000', 'YOU LOSE!!');
-    out = true;
-  } else if (guess === randomNumber) {
-    document.querySelector('.number').style.width = '30rem';
-    callChangeStyle(randomNumber, '#60b347', 'YOU WIN!!');
-    out = true;
+export function checkHighScore(highScore, score) {
+  if (score > highScore) {
+    setCookie('high', score);
+    document.querySelector('.highscore').innerHTML = score;
   }
-  return out;
+}
+export function changeStyle(bgColor) {
+  document.querySelector('.wrap').classList.remove('wrap-black');
+  document.querySelector('.wrap').classList.add(bgColor);
+  document.querySelector('.again').classList.remove('hidden');
+  document.querySelector('.check').classList.add('hidden');
 }
 
 export function changeScore(score) {
@@ -39,4 +30,27 @@ export function changeScore(score) {
 
 export function isGreaterOrLesser(guess, randomNumber) {
   return guess > randomNumber ? 'TOO HIGH!' : 'TOO LOW!';
+}
+
+export function setCookie(name, value) {
+  const d = new Date();
+  d.setTime(d.getTime() + 7 * 24 * 60 * 60 * 1000);
+  var expires = 'expires=' + d.toGMTString();
+  document.cookie = name + '=' + value + ';' + expires + ';path=/';
+}
+
+export function getCookie(name) {
+  var cname = name + '=';
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(cname) == 0) {
+      return c.substring(cname.length, c.length);
+    }
+  }
+  return '';
 }
