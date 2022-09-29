@@ -16,7 +16,7 @@ export function checkHighScore(highScore, score) {
   }
 }
 export function changeStyle(bgColor) {
-  document.querySelector('.wrap').classList.remove('wrap-black');
+  document.querySelector('.wrap').classList.remove('wrap-bg-black');
   document.querySelector('.wrap').classList.add(bgColor);
   document.querySelector('.again').classList.remove('hidden');
   document.querySelector('.check').classList.add('hidden');
