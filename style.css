@@ -106,9 +106,9 @@ h1 {
   flex: 0 0 200px;
 }
 
-/* .hidden {
+.hidden {
   visibility: hidden;
-} */
+}
 
 .guess {
   background: none;
